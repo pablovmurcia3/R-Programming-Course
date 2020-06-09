@@ -1,5 +1,5 @@
 # Read and Write data
-
+# 1 Read data
 #some functions for read data
 
 #READ.TABLE --- DEFAULT SEPARATOR A SPACE
@@ -40,5 +40,34 @@ tabAll <- read.table("datatable.txt", colClasses = classes)
 
 # Know THY SYSTEM 
 #CLACULATION MEMORY REQUIREMENTS
+
+
+
+# read metadata
+#sorce (inverse of dump)
+#dget (inverse of dput)
+
+
+# 2 Write data
+
+# write.table
+# WriteLines
+#
+#Textual Formats (preserve some metadata) ---- (like classes and labels) -- (Unix philosophy)
+#dumping
+#dputing
+# downside -- takes alot of space
+#DPUT
+y <- data.frame(a=1, b=1)
+dput(y) # 
+dput(y, file = "y.R") # read the metadata
+new.y <- dget("y.R")
+#DUMP ---- difference with dput-- dump can be used in multiple r objects
+x <-  "foo"
+y <- data.frame(a=1, b=1)
+dump(c("x","y"), file = "data.R")
+rm(x,y) #remove objects
+source("data.R") # read the metadata
+
 
 
