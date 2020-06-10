@@ -311,4 +311,64 @@ cnames <- c( "patient","age", "weight", "bp", "rating", "test")
 colnames(my_data) <- cnames
 
 my_data
+##########################################################
+x  <- 4
+
+x <- c(4, TRUE)
+class(x)
+
+x <- c(1,3, 5) 
+y <- c(3, 2, 10)
+rbind(x,y)
+
+
+x <- list(2, "a", "b", TRUE)
+x[[2]]
+
+
+x <- 1:4 
+y <- 2:3
+x+y
+
+
+x <- c(17, 14, 4, 5, 13, 12, 10)
+x[x > 10] <- 4
+x
+x[x >= 10] <- 4
+x
+
+library(readr)
+hw1_data <- read_csv("quiz/hw1_data.csv")
+View(hw1_data)
+
+hw1_data[c(1,2),]
+
+nrow(hw1_data)
+
+hw1_data[c(152,153),]
+tail(hw1_data)
+
+hw1_data[47,]
+
+my_na <- is.na(hw1_data$Ozone)
+my_na
+sum(my_na)
+
+ozoneveect <- hw1_data$Ozone
+ozone <- ozoneveect[!my_na]
+ozone
+mean(ozone)
+mean(hw1_data$Ozone, na.rm = TRUE)
+
+con<-hw1_data$Ozone > 31 & hw1_data$Temp > 90
+con
+sub <- hw1_data[con,]
+sub
+mean(sub$Solar.R, na.rm =TRUE)
+
+m6 <- hw1_data[hw1_data$Month==6,]
+mean(m6$Temp)
+
+m5 <- hw1_data[hw1_data$Month==5,]
+max(m5$Ozone,na.rm = TRUE)
 

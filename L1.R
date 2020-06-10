@@ -24,6 +24,11 @@ x[3]
 #Data types
 
 # all things are objects --- with ATOMIC cLASSES
+# R has six basic (‘atomic’) vector types: logical, 
+# integer, real, complex, string (or character) and raw
+# R's basic data structures include the vector, list, matrix,
+# data frame, and factors
+
 
 # vector (elements of the same class) --- c()
 #special type list ::: different classes of elementes in one vector
@@ -119,7 +124,7 @@ is.nan()
 
 #SPECIAL ATTRIBUTES
 # row.names
-
+# col.names
 
 #create a matrix by a data frame
 data.matrix() #coerce to a sinngle type 
