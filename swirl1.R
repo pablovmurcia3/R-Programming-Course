@@ -165,4 +165,150 @@ paste(1:3, c("X", "Y", "Z"), sep = "") # differente from c(vector, vector)
 
 paste(LETTERS, 1:4, sep = "-") # LETTERS is a predefined variable in R 
 # containing a character vector of all 26 
+##########################################################
+
+#NA 
+
+swirl()
+
+x <- c(44, NA, 5,NA)
+
+x*3
+
+y <- rnorm(1000)
+
+z <- rep(NA,1000) 
+
+my_data <- sample(c(y,z), 100)
+
+my_na <- is.na(my_data)
+
+my_na
+
+my_data == NA #The reason you got a vector of all NAs is that NA is not
+# really a value, but just a placeholder for a quantity that
+# is not available. 
+
+sum(my_na)
+# The trick is to recognize that underneath the surface, R
+# represents TRUE as the number 1 and FALSE as the number 0.
+# Therefore, if we take the sum of a bunch of TRUEs and
+# FALSEs, we get the total number of TRUEs.
+
+my_data
+
+# NAN (not a number)
+
+0/0
+
+Inf - Inf
+
+###########################################################
+
+x
+
+x[1:10] #this is an index vector
+# index vectors come in four different flavors -- logical
+# vectors, vectors of positive integers, vectors of negative
+# integers, and vectors of character strings 
+
+x[is.na(x)]
+
+y <- x[!is.na(x)]
+
+y
+
+y[y > 0]
+
+x[x > 0]
+
+x[!is.na(x) & x > 0] # wow ---- combine knowledge of logical 
+# operators and subsetting skills
+
+x[1:10] # In this case, we're providing a
+# vector of positive integers inside of 
+# the square brackets
+
+# R uses 'one-based indexing', which
+# means the first element of a vector is
+# considered element 1.
+
+x[c(3,5,7)]
+
+x[0]
+
+x[3000]
+
+x[c(-2,-10)] #gives us all elements of x EXCEPT for the 2nd and 10
+# elements. 
+
+x[-c(2,10)] # same result
+
+vect <- c(foo = 11, bar = 2, norf = NA) # Vector with names
+
+vect
+
+names(vect)
+
+vect2 <- c(11,2,NA)
+
+names(vect2) <- c("foo", "bar", "norf") # assign names
+
+identical(vect, vect2)
+
+vect["bar"]
+
+vect[c("foo","bar")] # subsetting a vector by named elements
+
+###########################################################
+
+my_vector <- 1:20
+
+my_vector
+
+dim(my_vector)
+
+length(my_vector)
+
+dim(my_vector) <- c(4, 5)
+
+dim(my_vector)
+
+attributes(my_vector)
+
+my_vector
+
+class(my_vector)
+
+my_matrix  <- my_vector
+#  the point that a matrix is simply an atomic vector with a
+# dimension attribute
+
+?matrix
+
+my_matrix2 <- matrix(1:20, nrow = 4, ncol = 5)
+
+identical(my_matrix, my_matrix2)
+
+patients <- c("Bill", "Gina", "Kelly", "Sean")
+
+cbind(patients, my_matrix) #we're left with a matrix 
+# of character strings, which is no good.
+
+# matrices can only contain ONE class of data.
+# Therefore, when we tried to combine a character vector with
+# a numeric matrix, R was forced to 'coerce' the numbers to
+# characters, hence the double quotes
+
+my_data <- data.frame(patients, my_matrix)
+
+my_data
+
+class(my_data)
+
+cnames <- c( "patient","age", "weight", "bp", "rating", "test")
+
+colnames(my_data) <- cnames
+
+my_data
 
