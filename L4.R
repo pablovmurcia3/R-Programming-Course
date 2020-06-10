@@ -55,8 +55,8 @@ x <- data.frame(foo =1:4, bar =c(T,T,F,F))
  
 x$f 
 x$b  # it works with only one letter!!!!
-x[["a"]]
-
+x[["f"]]
+x[["f", exact = FALSE]]
 ###########################################################
 
 #Removing NA values
