@@ -57,6 +57,52 @@ x$f
 x$b  # it works with only one letter!!!!
 x[["a"]]
 
- 
- 
- 
+###########################################################
+
+#Removing NA values
+
+x <- c(1,NA,3)
+#i whant to eliminate the NA
+bad <- is.na(x)
+bad
+x[!bad] # ! the opposite
+
+x <- c(1,NA,3)
+y <- c("a",NA, "C")
+
+good <- complete.cases(x,y)
+
+x[good]
+y[good] 
+
+#from data frame
+# goodDataFrame <- complete.cases(data.frame)
+# data,frame[goodDataFrame,]  (in rows)
+
+###########################################################
+# Vectorized Operations
+
+# + > < 
+
+x <- 1:4
+y <- 6:9
+x
+y
+x + y
+x > 2
+x >= 2
+y == 8
+x*y # one by one
+x/y
+
+#Matrices 
+x <- matrix(1:4, 2,2) # element-wise multiplication
+
+y <- matrix(rep(10,4), 2,2) #true matrix multiplication
+
+
+x*y
+x%*%y
+
+
+
