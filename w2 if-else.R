@@ -36,10 +36,12 @@ x
 
 if(x > 3) { 
   y <- 10 
+  print(y)
 } else { 
     y <- 0 
+    print(y)
 }
-y
+
 
 # This expression can also be written a different, 
 # but equivalent, way in R.
