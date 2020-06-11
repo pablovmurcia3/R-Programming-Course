@@ -51,5 +51,4 @@ for(i in seq_len(nrow(x))) { #seq_len takes the number of rows in x and creates 
 #seq_along
 #seq_len
 
-
 seq_len(3)
