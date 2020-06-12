@@ -45,3 +45,43 @@ f(3)
 
 # In R, the return value of a function isalways the verylast expression 
 # that is evaluated
+
+x <- 1:20
+above <- function(x, n){
+  use <- x > n
+  x[use]
+}
+
+above(x,6)
+
+above <- function(x, n){
+  use <- x > n
+  x[use]
+}
+
+
+above <- function(x, n = 10 ){  # the DEFAULT is 10
+  use <- x > n
+  x[use]
+}
+
+
+above(x)
+above(x,3)
+
+columnmean <- function(y, removeNA = TRUE) {
+  nc <- ncol(y)
+  means <- double(nc) ## creates a numeric vector of o
+  for(i in 1:nc ) {
+    means[i] <- mean(y[,i],na.rm = removeNA)
+  }
+  means
+}
+numeric(nc)
+
+hw1_data <- read_csv("quiz/hw1_data.csv")
+columnmean(hw1_data)
+a <- matrix( 1:20, 4)
+columnmean(a)
+?col_number
+
