@@ -75,3 +75,53 @@ which(ints > 7)
 any(ints < 0)
 
 all(ints > 0)
+
+######################################################################
+
+swirl()
+
+Sys.Date()
+
+mean( c(2, 4, 5))
+
+
+boring_function <- function(x) {
+  x
+}
+submit()
+
+boring_function('My first function!')
+# To understand computations in R, two slogans are helpful: 
+# 1. Everything that exists is an object. 
+# 2. Everything that happens is a function call.
+
+boring_function # source code
+
+my_mean <- function(my_vector) {
+  sum(my_vector)/length(my_vector)
+}
+
+submit()
+
+my_mean(c(4, 5, 10))
+
+remainder <- function(num, divisor =2 ) {
+  num %% divisor
+  
+}
+
+submit()
+
+remainder(5)
+
+remainder(11, 5)
+
+remainder(divisor = 11, num = 5)
+# when you explicitly designate argument values by name, the ordering of the
+# arguments becomes unimportant.
+
+remainder(divisor = 11, num = 5)
+
+remainder(4, div = 2)
+
+swirl()
