@@ -15,7 +15,7 @@
 # have named arguments that can have default values
 
 # formal arguments, included in the function definition ( use formals())
-
+# Free variables, elements that are not arguments
 
 # ARGUMENT MATCHING
 # the arguments can be matched positionally or bay name 
