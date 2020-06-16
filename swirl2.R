@@ -82,6 +82,8 @@ swirl()
 
 Sys.Date()
 
+x <- Sys.Date()
+
 mean( c(2, 4, 5))
 
 
@@ -125,3 +127,105 @@ remainder(divisor = 11, num = 5)
 remainder(4, div = 2)
 
 swirl()
+
+args(remainder) # you can pass functions as arguments
+
+add_two_numbers <- function(num1, num2){
+     num1 + num2
+}
+
+multiply_two_numbers <- function(num1, num2){
+	num1 * num2
+}
+
+some_function <- function(func){
+  func(2, 4)
+}
+# by passing functions as arguments  some_function(add_two_numbers)
+# will evaluate to 6, while some_function(multiply_two_numbers) will evaluate
+# to 8.
+
+
+evaluate <- function(func, dat){
+  func(dat)
+}
+
+submit()
+
+evaluate(sd, c(1.4, 3.6, 7.9, 8.8))
+
+# anonymous functions
+
+evaluate(function(x){x+1}, 6) # The first argument is a tiny anonymous function 
+
+evaluate(function(x){x[1]},c(8, 4, 0))
+
+evaluate(function(x){x[length(x)]}, c(8, 4, 0))
+
+?paste # The ellipsis allows an indefinite number of arguments to be passed into
+# a function
+
+paste("Programming", "is", "fun!")
+
+# The ellipses can be used to pass on arguments to other functions that are
+# used within the function you're writing
+# This is a strict rule in R programming: all arguments after an ellipses must
+# have default values
+
+
+telegram <- function(...){
+  paste("START", ..., "STOP")
+  
+}
+
+submit()
+
+telegram("hi")
+
+add_alpha_and_beta <- function(...){
+  #   # First we must capture the ellipsis inside of a list
+  #   # and then assign the list to a variable. Let's name this
+  #   # variable `args`.
+  #
+  args <- list(...)
+  #
+  #   # We're now going to assume that there are two named arguments within args
+  #   # with the names `alpha` and `beta.` We can extract named arguments from
+  #   # the args list by using the name of the argument and double brackets. The
+  #   # `args` variable is just a regular list after all!
+  #   
+  alpha <- args[["alpha"]]
+  beta  <- args[["beta"]]
+  #
+  #   # Then we return the sum of alpha and beta.
+  #
+  alpha + beta 
+}
+
+add_alpha_and_beta(alpha=1000, beta=300)
+
+mad_libs <- function(...){    # REVISAR
+  # Do your argument unpacking here!
+  args <- list(...)
+  place <- args[["place"]]
+  adjective <- args[["adjective"]]
+  noun <- args[["noun"]]
+  # Don't modify any code below this comment.
+  # Notice the variables you'll need to create in order for the code below to
+  # be functional!
+  paste("News from", place, "today where", adjective, "students took to the streets in protest of the new", noun, "being installed on campus.")
+}
+
+mad_libs(place='New Zealand', adjective='beautiful', noun='landscape')
+
+
+# New binary operator!!!
+
+"%p%" <- function(x,y){ 
+  
+  paste(x,y)
+  
+}
+
+
+"I"%p%"love"%p%"R!"
