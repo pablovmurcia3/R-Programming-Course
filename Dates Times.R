@@ -63,6 +63,15 @@ x-y
 
 # plot function will recognize the class
 
+# CHANGE DATES
+
 x <- as.POSIXct("2012-10-25 01:00:00") 
 y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT") 
 y-x   
+
+nzd <- data.frame(date=c("31/08/2011", "31/07/2011", "30/06/2011"), mid=c(0.8378,0.8457,0.8147))
+nzd
+
+
+nzd$date <- format(as.Date(nzd$date, format = "%d/%m/%Y"), "%Y-%m-%d")
+nzd
