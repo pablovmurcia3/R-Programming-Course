@@ -54,6 +54,44 @@ pollutantmean("specdata", "f", 23)
 
 # 2
 
+complete <- function(directory, id = 1:332)  {
+  
+        listf <- list.files(directory, full.names = TRUE)
+  
+        df <- data.frame()
+        
+        for (i in id) {
+                  df[i,1] <- (read.csv(listf[i]))[1,"ID"]
+                  df[i,2] <- sum(complete.cases(read.csv(listf[i])))
+        }
+        names(df) <- c("id","nobs")
+        df1 <- df[!is.na(df$id),]
+        df1
+}
 
-a <-matrix(1:12, nrow =6)
-a[]
+# este es
+complete <- function(directory, id = 1:332)  {
+  
+          listf <- list.files(directory, full.names = TRUE)
+          
+          x <- numeric()
+          y <- numeric()
+          for (i in id) {
+            x[i] <- (read.csv(listf[i]))[1,"ID"]
+            y[i] <- sum(complete.cases(read.csv(listf[i])))
+          }
+         x1 <- x[!is.na(x)] 
+         y1 <- y[!is.na(y)]
+         df <- data.frame(id = x1, nobs = y1)
+         df
+}
+complete("specdata", 1)
+
+complete("specdata", 30:25)
+
+complete("specdata", c(2, 4, 8, 10, 12))
+
+# 3 
+
+x <- 30:2
+x
