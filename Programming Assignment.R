@@ -5,21 +5,6 @@ f <- list.files("specdata", full.names = TRUE)
 f
 length(f)
 
-a1 <- read.csv(f[1])
-a2 <- read.csv(f[2])
-df <- data.frame()
-
-for (i in 3:5) {
-  df <- rbind(df, read.csv(f[i]))
-}
-df
-
-a12 <- rbind(a1,a2)
-a12$ID == 
-subset(a12)
-x <-1:2
-sub <- a12[which(a12[,"ID"] == 2),]
-s<-complete.cases(sub)
 
 # 1
 
@@ -55,43 +40,112 @@ pollutantmean("specdata", "f", 23)
 # 2
 
 complete <- function(directory, id = 1:332)  {
-  
-        listf <- list.files(directory, full.names = TRUE)
-  
-        df <- data.frame()
         
+        listf <- list.files(directory, full.names = TRUE)
+        x <- numeric(length(id))
+        k <- 1
         for (i in id) {
-                  df[i,1] <- (read.csv(listf[i]))[1,"ID"]
-                  df[i,2] <- sum(complete.cases(read.csv(listf[i])))
+                filei <- read.csv(listf[i])
+                completei <- sum(complete.cases(filei))
+                x[k] <- completei
+                k <- k +1
         }
-        names(df) <- c("id","nobs")
-        df1 <- df[!is.na(df$id),]
-        df1
+        df <- data.frame(id, nobs = x)
+        df
 }
 
-# este es
-complete <- function(directory, id = 1:332)  {
-  
-          listf <- list.files(directory, full.names = TRUE)
-          
-          x <- numeric()
-          y <- numeric()
-          for (i in id) {
-            x[i] <- (read.csv(listf[i]))[1,"ID"]
-            y[i] <- sum(complete.cases(read.csv(listf[i])))
-          }
-         x1 <- x[!is.na(x)] 
-         y1 <- y[!is.na(y)]
-         df <- data.frame(id = x1, nobs = y1)
-         df
-}
+#  A common mistake is to use the indices of id
+# to fill in the vector v.
+
 complete("specdata", 1)
+
+complete("specdata",  c(2, 4, 8, 10, 12))
 
 complete("specdata", 30:25)
 
-complete("specdata", c(2, 4, 8, 10, 12))
+complete("specdata", 3)
+
 
 # 3 
 
-x <- 30:2
-x
+
+corr <- function(directory, threshold = 0){
+        
+        listf <- list.files(directory, full.names = TRUE)
+        x <- numeric()
+        k <- 1
+        for (i in 1:length(listf)) {
+          
+                  filei <- read.csv(listf[i])
+                  
+                  if (sum(complete.cases(filei)) > threshold) {
+                          
+                         corre <- cor(filei[,2], filei[,3], use = "complete.obs")
+                         x[k] <- corre
+                         k <- k+1
+                    
+                  } 
+                  
+        }
+        
+        x  
+}
+
+cr <- corr("specdata", 150)
+head(cr)
+summary(cr)
+
+cr <- corr("specdata", 400)
+head(cr)
+summary(cr)
+
+cr <- corr("specdata", 5000)
+summary(cr)
+length(cr)
+
+cr <- corr("specdata")
+summary(cr)
+length(cr)
+
+########################################################################
+
+pollutantmean("specdata", "sulfate", 1:10)
+
+pollutantmean("specdata", "nitrate", 70:72)
+
+pollutantmean("specdata", "sulfate", 34)
+
+pollutantmean("specdata", "nitrate")
+
+cc <- complete("specdata", c(6, 10, 20, 34, 100, 200, 310))
+print(cc$nobs)
+
+cc <- complete("specdata", 54)
+print(cc$nobs)
+
+RNGversion("3.5.1")  
+set.seed(42)
+cc <- complete("specdata", 332:1)
+use <- sample(332, 10)
+print(cc[use, "nobs"])
+
+cr <- corr("specdata")                
+cr <- sort(cr)   
+RNGversion("3.5.1")
+set.seed(868)                
+out <- round(cr[sample(length(cr), 5)], 4)
+print(out)
+
+cr <- corr("specdata", 129)                
+cr <- sort(cr)                
+n <- length(cr)    
+RNGversion("3.5.1")
+set.seed(197)                
+out <- c(n, round(cr[sample(n, 5)], 4))
+print(out)
+
+cr <- corr("specdata", 2000)                
+n <- length(cr)                
+cr <- corr("specdata", 1000)                
+cr <- sort(cr)
+print(c(n, round(cr, 4)))
