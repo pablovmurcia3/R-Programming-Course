@@ -28,6 +28,28 @@ mapply(noise, 1:5, 1:5, 2) # not what we expected
 
 list(noise(1, 1, 2), noise(2, 2, 2), + noise(3, 3, 2), noise(4, 4, 2), + noise(5, 5, 2)) 
 
+# The mapply() function can be use to automatically “vectorize” a function. 
+# What this means is that it can be used to take a function that typically
+# only takes single arguments and create a new function that can take vector
+# arguments. 
+
+sumsq <- function(mu, sigma, x) {
+        sum(((x - mu) / sigma)^2) 
+}
+
+x <- rnorm(100) ## Generate some data 
+sumsq(1:10, 1:10, x) ## This is not what we want (test diferents mu and sigmas)
+
+mapply(sumsq, 1:10, 1:10, MoreArgs = list(x = x))
+
+# There’s even a function in R called Vectorize() that automatically can create a
+# vectorized version of your function. 
+
+vsumsq <- Vectorize(sumsq, c("mu", "sigma")) 
+vsumsq(1:10, 1:10, x)
+
+
+
 # Tapply
 
 # tapply() is used to apply a function over subsets of a vector. 
