@@ -72,3 +72,38 @@ sapply(unique_vals, length)
 sapply(flags, unique)
 
 lapply(unique_vals, function(elem) elem[2]) # anonymous functions
+
+###############################################################################
+
+sapply(flags, unique)
+
+# Whereas sapply() tries to 'guess' the correct format of the result, vapply()
+# allows you to specify it explicitly.
+
+vapply(flags, unique, numeric(1))
+
+ok()
+
+sapply(flags, class) 
+
+vapply(flags, class, character(1)) # The 'character(1)' argument tells R that we
+# expect the class function to return a character vector of length 1 when applied
+# to EACH column of the flags dataset.
+
+# You might think of vapply() as being 'safer' than sapply(), since it requires
+# you to specify the format of the output in advance, instead of just allowing R
+# to 'guess' what you wanted. In addition, vapply() may perform faster than
+# sapply() for large datasets. However, when doing data analysis interactively
+# (at the prompt), sapply() saves you some typing and will often be good enough.
+
+?tapply
+
+table(flags$landmass)
+
+table(flags$animate)
+
+tapply(flags$animate, flags$landmass, mean)
+
+tapply(flags$population, flags$red, summary)
+
+tapply(flags$population, flags$landmass, summary)
