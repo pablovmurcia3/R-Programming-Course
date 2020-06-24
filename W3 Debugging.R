@@ -114,6 +114,34 @@ traceback()
 # realized the object y did not exist. 
 
 # Debug()
-# Debug any function 
+# you can Debug any function 
+
+# With the debugger,you can step through an R function one expression at a 
+# time to pin point exactly where an error occurs
+
+debug(lm)
+lm(y ~ x)
+
+# Now, every time you call the lm() function it will launch the interactive
+# debugger. To turn this behavior off you need to call the undebug() function
+
+undebug(lm)
+
+# n executes the current expression and moves to the next expression 
+
+# c continues execution of the function and does not stop until either an 
+# error or the function exits 
+
+# Q quits the browser
 
 
+# Recover
+
+# With recover() you can tell R that when an error occurs,it should halt 
+# execution at the exact point at which the error occurred. That can give you
+# the opportunity to poke around in the environment in which the error occurred. 
+
+options(error = recover) #Change default R error behavior
+read.csv("nosuchfile") ## This code doesn't work 
+
+# Debugging tools are not a substitute for thinking!
