@@ -107,3 +107,36 @@ tapply(flags$animate, flags$landmass, mean)
 tapply(flags$population, flags$red, summary)
 
 tapply(flags$population, flags$landmass, summary)
+#############################################################################
+library(datasets)
+data(iris)
+head(iris)
+
+
+mean(iris$Sepal.Length)
+
+tapply(iris$Sepal.Length, iris$Species, mean)
+
+
+colMeans(iris[,1:4])
+
+apply(iris[,1:4], 2, mean)
+
+library(datasets)
+data(mtcars)
+
+head(mtcars)
+?mtcars
+
+tapply(mtcars$mpg, mtcars$cyl, mean)
+
+sapply(split(mtcars$mpg, mtcars$cyl), mean)
+with(mtcars, tapply(mpg, cyl, mean))
+
+hpmean <- tapply(mtcars$hp, mtcars$cyl, mean)
+hpmean
+hpmean4 <- hpmean[1]
+hpmean4
+hpmean8 <- hpmean[3]
+hpmean8
+hpmean4 - hpmean8
