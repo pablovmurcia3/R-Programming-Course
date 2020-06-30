@@ -40,3 +40,62 @@ str(plants)
 # 5166 observations and 10 variables. It then gives us the name and class of each
 # variable, as well as a preview of its contents.
 
+##############################################################################
+
+?sample
+
+sample(1:6, 4, replace = TRUE)
+
+sample(1:20, 10)
+
+LETTERS
+
+sample(LETTERS)
+# When the 'size' argument to sample() is not specified, R takes a
+# sample equal in size to the vector from which you are sampling
+
+flips <- sample(c(0,1), 100, replace = TRUE, prob = c(0.3, 0.7)) # the coin is unfair, we must 
+# attach specific probabilities to the values
+
+flips
+
+sum(flips)
+
+?rbinom
+
+rbinom(1, 100, 0.7)
+# A binomial random variable represents the number of 'successes' (heads) in a
+# given number of independent 'trials' (coin flips). Therefore, we can generate a
+# single random variable that represents the number of heads in 100 flips of our
+# unfair coin using rbinom(1, size = 100, prob = 0.7). Note that you only specify
+# the probability of 'success' (heads) and NOT the probability of 'failure'
+# (tails). Try it now.
+
+
+flips2 <- rbinom(100, 1, 0.7)
+# if we want to see all of the 0s and 1s, we can request 100
+# observations, each of size 1, with success probability of 0.7. 
+
+sum(flips2)
+flips2
+
+?rnorm
+
+rnorm(10)
+
+rnorm(10, 100, 25)
+
+?rpois 
+
+rpois(5, 10)
+
+my_pois <- replicate(100, rpois(5, 10))
+
+my_pois # replicate() created a matrix, each column of which contains 5 random 
+# numbers generated from a Poisson distribution with mean 10
+
+cm <- colMeans(my_pois)
+
+hist(cm)
+# Looks like our column means are almost normally distributed, right? That's the
+# Central Limit Theorem at work
