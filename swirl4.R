@@ -99,3 +99,47 @@ cm <- colMeans(my_pois)
 hist(cm)
 # Looks like our column means are almost normally distributed, right? That's the
 # Central Limit Theorem at work
+
+##############################################################################
+
+swirl()
+
+data(cars)
+
+help(cars)
+
+head(cars)
+
+?plot
+
+plot(x = cars$speed, y = cars$dist)
+
+plot(x = cars$dist, y = cars$speed)
+
+plot(x = cars$speed, y = cars$dist, xlab = "Speed")
+
+plot(x = cars$speed, y = cars$dist, ylab = "Stopping Distance")
+
+plot(x = cars$speed, y = cars$dist, xlab = "Speed", ylab = "Stopping Distance")
+
+plot(cars, main = "My Plot")
+
+plot(cars, sub = "My Plot Subtitle")
+
+?par
+
+plot(cars, col = 2 )
+
+plot(cars, xlim = c(10,15))
+
+?points
+
+plot(cars, pch =2 )
+
+data(mtcars)
+
+?boxplot
+
+boxplot(formula = mpg ~ cyl, data = mtcars)
+
+hist(mtcars$mpg)
