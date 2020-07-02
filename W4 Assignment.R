@@ -90,8 +90,6 @@ best("NY", "hert attack")
 
 # 2
 
-# 
-
 # sorting
 TX1 <-outcome1[outcome1$State=="TX",]
 TX2 <- TX1[complete.cases(TX1[,23]), ]
@@ -193,5 +191,135 @@ rankhospital("MD","heart attack", "worst")
 rankhospital("TX","heart failure", 4)
 rankhospital("MD","heart attack", 5000)
 rankhospital("TX","pneumonia",302)
+
+# 3
+
+# read data
+
+outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = 
+                         "Not Available", stringsAsFactors = FALSE)
+  
+
+
+# condition ---failure
+outcome2 <- outcome1[complete.cases(outcome1[,11]),]
+
+outcome3 <- outcome2[order(outcome2[,11], outcome2[,2]),]
+# split
+states <- split(outcome1, outcome1[,7])
+length(states)
+AL <- states[[2]]
+aa <- states[[2]]
+
+#sapply
+
+ vect <- sapply(states, function(df){
+  
+  df[20,2]  # if best, worst, numeric
+  
+})
+
+names(vect)
+data.frame(hospital=vect, state= names(vect))
+
+
+rankall <- function(outcome, num = "best" ) {
+  
+        outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = 
+                                "Not Available", stringsAsFactors = FALSE)
+        
+        if (outcome == "heart attack") {
+          
+                outcomecc <- outcome1[complete.cases(outcome1[,11]),]
+                outcomeor <- outcomecc[order(outcomecc[,11], outcomecc[,2]),]
+                
+                states <- split(outcomeor, outcomeor[,7])
+                
+                if(is.numeric(num)){
+                  
+                        vect <- sapply(states, function(df) {df[num,2]})
+                        data.frame(hospital=vect, state= names(vect))
+                  
+                } else if(num == "worst") {
+                  
+                        vect <- sapply(states, function(df) {tail(df[,2], n =1)})
+                        data.frame(hospital=vect, state= names(vect))
+                  
+                  
+                } else if(num == "best") {
+                        
+                        vect <- sapply(states, function(df) {df[1,2]})
+                        data.frame(hospital=vect, state= names(vect))
+                  
+                }
+          
+          
+          
+        } else if (outcome == "heart failure") {
+          
+                outcomecc <- outcome1[complete.cases(outcome1[,17]),]
+                outcomeor <- outcomecc[order(outcomecc[,17], outcomecc[,2]),]
+          
+                states <- split(outcomeor, outcomeor[,7])
+          
+                if(is.numeric(num)){
+            
+                        vect <- sapply(states, function(df) {df[num,2]})
+                        data.frame(hospital=vect, state= names(vect))
+            
+                } else if(num == "worst") {
+                        
+                        vect <- sapply(states, function(df) {tail(df[,2], n =1)})
+                        data.frame(hospital=vect, state= names(vect))
+            
+            
+                } else if(num == "best") {
+                  
+                        vect <- sapply(states, function(df) {df[1,2]})
+                        data.frame(hospital=vect, state= names(vect))
+            
+          }
+          
+          
+          
+        } else if (outcome == "pneumonia") {
+          
+                outcomecc <- outcome1[complete.cases(outcome1[,23]),]
+                outcomeor <- outcomecc[order(outcomecc[,23], outcomecc[,2]),]
+          
+                states <- split(outcomeor, outcomeor[,7])
+          
+                if(is.numeric(num)){
+                  
+                        vect <- sapply(states, function(df) {df[num,2]})
+                        data.frame(hospital=vect, state= names(vect))
+            
+                } else if(num == "worst") {
+            
+                        vect <- sapply(states, function(df) {tail(df[,2], n =1)})
+                        data.frame(hospital=vect, state= names(vect))
+            
+            
+                } else if(num == "best") {
+            
+                        vect <- sapply(states, function(df) {df[1,2]})
+                        data.frame(hospital=vect, state= names(vect))
+            
+                }
+          
+          
+        } else {
+          
+                stop("invalid outcome")
+          
+        }
+        
+  
+}
+
+head(rankall("heart attack", 20),10)
+tail(rankall("pneumonia","worst"),3)
+tail(rankall("heart failure"),10)
+
 
 
