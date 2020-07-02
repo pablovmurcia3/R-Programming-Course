@@ -35,7 +35,10 @@ z1
 sort(z1)[1]
 
 best <- function(state,outcome) {
-        
+  
+        outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = 
+                               "Not Available", stringsAsFactors = FALSE)
+  
         if (state %in% outcome1[,7]) {
                   
                 df <-outcome1[outcome1[,7] == state,] 
@@ -86,4 +89,109 @@ best("BB", "heart attack")
 best("NY", "hert attack")
 
 # 2
+
+# 
+
+# sorting
+TX1 <-outcome1[outcome1$State=="TX",]
+TX2 <- TX1[complete.cases(TX1[,23]), ]
+OTX <- TX2[order(TX2[,23], TX2[,2]), ]
+
+
+# taking names 
+
+names <- OTX[,2]
+names
+
+rankhospital <- function(state,outcome, num = "best") {
+  
+        outcome1 <- read.csv("outcome-of-care-measures.csv", na.strings = 
+                              "Not Available", stringsAsFactors = FALSE)
+        
+        if (state %in% outcome1[,7]) {
+          
+                  df <-outcome1[outcome1[,7] == state,] 
+          
+        } else { 
+          
+                  stop("invalid state")
+          
+        } 
+        
+        
+        if (outcome == "heart attack") {
+          
+                dfcc <- df[complete.cases(df[,11]),]
+                odfcc <- dfcc[order(dfcc[,11], dfcc[,2]), ]
+                hnames <- odfcc[,2]
+
+                if (is.numeric(num)){
+                  
+                          hnames[num]
+                  
+                } else if (num == "worst") {
+                  
+                          tail(hnames, n=1)
+                  
+                }  else if (num == "best") {
+                  
+                          hnames[1]
+                  
+                }
+                
+        
+        } else if (outcome == "heart failure") {
+          
+                dfcc <- df[complete.cases(df[,17]),]
+                odfcc <- dfcc[order(dfcc[,17], dfcc[,2]), ]
+                hnames <- odfcc[,2]
+                
+                if (is.numeric(num)){
+                  
+                        hnames[num]
+                  
+                } else if (num == "worst") {
+                  
+                        tail(hnames, n=1)
+                  
+                } else if (num == "best") {
+                  
+                        hnames[1]
+                   
+                }
+                
+         
+        } else if  (outcome == "pneumonia") {
+          
+               dfcc <- df[complete.cases(df[,23]),]
+               odfcc <- dfcc[order(dfcc[,23], dfcc[,2]), ]
+               hnames <- odfcc[,2]
+               
+               if (is.numeric(num)){
+                 
+                      hnames[num]
+                 
+               } else if (num == "worst") {
+                 
+                      tail(hnames, n=1)
+                 
+               }  else if (num == "best") {
+                 
+                      hnames[1]
+                 
+               }
+          
+        } else {
+          
+          stop("invalid outcome")
+        }
+        
+}
+  
+
+rankhospital("MD","heart attack", "worst")
+rankhospital("TX","heart failure", 4)
+rankhospital("MD","heart attack", 5000)
+rankhospital("TX","pneumonia",302)
+
 
