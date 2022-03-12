@@ -67,13 +67,12 @@ x <- list(1,"a", TRUE, 1 + 4i)
 
 x # not like the vector  [[]] is the element
 
-#Matrices = object tha have a special attribute of
+#Matrices = object that have a special attribute of
 #Dimension (itself a interger lenght 2 (nrow, ncol))
 
 x<-matrix(1:4,nrow=2)
 attributes(x) # we have a attribute! the dim
 dim(x)
-
 
 #construct column-wise starting in the upper lect 
 
@@ -106,10 +105,17 @@ unclass(x) #bring it down to an integer vector
 
 
 x <- factor(c("yes","yes", "no","yes", "no"), levels =c("yes", "no"))
+
+
 #select baseline level --- the first level of the factor
 #default is for alphabetic order
 unclass(x) #now yes is the baseline level 
 
+
+f <- gl(3, 10)
+f <- factor(f, levels = c(1,2,3), labels = c("hombre", "mujer", "Otro"))
+f
+attributes(f)
 # Missing values (NA, NaN)
 #NaN is for undifined mathematical operations
 #test for NA
@@ -130,6 +136,7 @@ is.nan()
 data.matrix() #coerce to a sinngle type 
 
 x <- data.frame(foo =1:4, bar =c(T,T,F,F)) 
+x
 nrow(x)
 ncol(x)
 
